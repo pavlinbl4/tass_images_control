@@ -1,4 +1,5 @@
 import re
+from pathlib import Path
 
 import requests
 from bs4 import BeautifulSoup
@@ -6,8 +7,12 @@ from loguru import logger
 
 from curl import cookies, headers
 from db_handler import initialize_database, is_file_sent, log_file_sent
+from download_tass_preview import download_photo_preview_by_id
 from first_enter import first_enter
 from xlsx_tools import XlsxTools
+from datetime import datetime
+
+base_dir = Path().home() / 'Library/Mobile Documents/com~apple~CloudDocs/Documents/TASS/Images_on_site'
 
 
 def get_response_text(work_url):
@@ -101,6 +106,7 @@ def main(author_name):
                         XlsxTools(report_file).append_data(xlsx_file,
                                                            [int_images_number, image_id, image_date, image_caption,
                                                             image_link])
+                        download_photo_preview_by_id(image_id, f'{base_dir}/{datetime.now().strftime("%Y%m%d-%H%M")}', image_file_name=None)
                     int_images_number -= 1
 
         else:
