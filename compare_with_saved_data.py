@@ -1,3 +1,6 @@
+from loguru import logger
+
+
 
 """Если переданное в функцию число не равно числу в текстовом файле,
 то функция возвращает True"""
@@ -20,9 +23,13 @@ class CompareWithSavedData:
 
     def compare(self):
         with open(self.text_file_name, 'r+') as text_file:
-            if text_file.read().strip() != str(self.any_date):
+            file_content = text_file.read().strip()  # Сохраняем значение один раз
+            logger.info(f'{file_content = }')
+            logger.info(f'{self.any_date = }')
+            logger.info(file_content != str(self.any_date))
+            if file_content != str(self.any_date):
                 text_file.seek(0)
-                text_file.write(str(int(self.any_date)))
+                text_file.write(str(self.any_date))
                 text_file.truncate()
                 return True
             return False
