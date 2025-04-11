@@ -10,6 +10,7 @@ from curl import cookies, headers
 from db_handler import initialize_database, is_file_sent, log_file_sent
 from download_tass_preview import download_photo_preview_by_id
 from first_enter import first_enter
+from send_message_to_telegram import send_telegram_message
 from xlsx_tools import XlsxTools
 from datetime import datetime
 
@@ -62,6 +63,7 @@ def main(author_name):
 
     if compare_with_saved_data(base_dir, int_images_number):
 
+
         xlsx_file = XlsxTools(report_file).initialize()
 
         # получаю количество страниц со снимками
@@ -103,6 +105,7 @@ def main(author_name):
 
     else:
         logger.info("NO NEW IMAGES ADDED")
+        send_telegram_message("NO NEW IMAGES ADDED")
 
 
 #
