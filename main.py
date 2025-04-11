@@ -14,6 +14,7 @@ from send_message_to_telegram import send_telegram_message
 from xlsx_tools import XlsxTools
 from datetime import datetime
 
+
 base_dir = Path().home() / 'Library/Mobile Documents/com~apple~CloudDocs/Documents/TASS/Images_on_site'
 
 
