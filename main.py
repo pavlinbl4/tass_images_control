@@ -42,9 +42,7 @@ def cook_soup(work_url):
     return soup
 
 
-def get_image_information(i, thumbs_data):
-    image_title = thumbs_data[i].find('p').text
-    return image_title
+
 
 
 def main(author_name):

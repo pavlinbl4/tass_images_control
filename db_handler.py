@@ -12,16 +12,14 @@ def initialize_database():
     # conn = sqlite3.connect('sent_files.db')
     conn = sqlite3.connect(base_path)
     cursor = conn.cursor()
-    cursor.execute('''
-        CREATE TABLE IF NOT EXISTS sent_files (
-            image_id TEXT,
+    cursor.execute('''CREATE TABLE IF NOT EXISTS sent_files (image_id TEXT,
             image_caption TEXT,
             image_link TEXT,
-            check_date TEXT
-            )
-    ''')
+            check_date TEXT)''')
     conn.commit()
     conn.close()
+
+
 
 
 def log_file_sent(image_id, image_caption, image_link):
